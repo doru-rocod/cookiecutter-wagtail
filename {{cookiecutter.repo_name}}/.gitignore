@@ -1,3 +1,5 @@
+pip-selfcheck.json
+.Python
 *.pyc
 .DS_Store
 *.swp
@@ -7,3 +9,10 @@
 /.vagrant/
 /Vagrantfile.local
 /docs/_build/
+/bin/
+/lib/
+/include/
+.coverage
+coverage.xml
+man/
+nosetests.xml
