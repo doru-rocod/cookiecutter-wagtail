@@ -27,6 +27,8 @@ INSTALLED_APPS = (
     '{{ cookiecutter.repo_name }}.home',
     '{{ cookiecutter.repo_name }}.search',
 
+    'overextends',
+
     'wagtail.contrib.wagtailsearchpromotions',
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
