@@ -49,8 +49,10 @@ APP_NAME = env.get('APP_NAME', '{{ cookiecutter.repo_name }}')
 if 'SECRET_KEY' in env:
     SECRET_KEY = env['SECRET_KEY']
 
-if 'ALLOWED_HOSTS' in env:
-    ALLOWED_HOSTS = env['ALLOWED_HOSTS'].split(',')
+ALLOWED_HOSTS = [
+    '.fourdigits.nl',  # Allow domain and subdomains
+    '.fourdigits.nl.',  # Also allow FQDN and subdomains
+]
 
 if 'PRIMARY_HOST' in env:
     BASE_URL = 'http://%s/' % env['PRIMARY_HOST']
@@ -81,12 +83,15 @@ if 'MEDIA_DIR' in env:
 
 # Database
 
+env.get('PGDATABASE', APP_NAME),
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env.get('PGDATABASE', APP_NAME),
         'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
-
+        'USER': env.get('PGDATABASE', APP_NAME),
+    	'HOST': '10.0.1.157',
+    	'PASSWD': '',
         # User, host and port can be configured by the PGUSER, PGHOST and
         # PGPORT environment variables (these get picked up by libpq).
     }
@@ -160,16 +165,16 @@ LOGGING = {
 
 
 # Log errors to file
-if 'ERROR_LOG' in env:
-    LOGGING['handlers']['errors_file'] = {
-        'level':        'ERROR',
-        'class':        'logging.handlers.RotatingFileHandler',
-        'filename':     env['ERROR_LOG'],
-        'maxBytes':     5242880, # 5MB
-        'backupCount':  5
-    }
-    LOGGING['loggers']['django.request']['handlers'].append('errors_file')
-    LOGGING['loggers']['django.security']['handlers'].append('errors_file')
+
+LOGGING['handlers']['errors_file'] = {
+    'level':        'ERROR',
+    'class':        'logging.handlers.RotatingFileHandler',
+    'filename':     '/var/log/django_errors.log',
+    'maxBytes':     5242880, # 5MB
+    'backupCount':  5
+}
+LOGGING['loggers']['django.request']['handlers'].append('errors_file')
+LOGGING['loggers']['django.security']['handlers'].append('errors_file')
 
 
 try:
