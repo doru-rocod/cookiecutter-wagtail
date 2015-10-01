@@ -95,7 +95,7 @@ WSGI_APPLICATION = '{{ cookiecutter.repo_name }}.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '{{ cookiecutter.repo_name }}',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
