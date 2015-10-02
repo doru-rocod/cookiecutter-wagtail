@@ -142,16 +142,6 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
-# Use Elasticsearch as the search backend for extra performance and better search results
-
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
-        'INDEX': '{{ cookiecutter.repo_name }}',
-    },
-}
-
-
 # Celery settings
 # When you have multiple sites using the same Redis server,
 # specify a different Redis DB. e.g. redis://localhost/5

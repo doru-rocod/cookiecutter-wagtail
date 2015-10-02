@@ -136,15 +136,14 @@ if REDIS_LOCATION is not None:
 
 # Elasticsearch
 
-if 'ELASTICSEARCH_URL' in env:
-    WAGTAILSEARCH_BACKENDS = {
-        'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
-            'URLS': [env['ELASTICSEARCH_URL']],
-            'INDEX': APP_NAME,
-        },
-    }
+# Use Elasticsearch as the search backend for extra performance and better search results
 
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+        'INDEX': '{{ cookiecutter.repo_name }}',
+    },
+}
 
 # Logging
 
