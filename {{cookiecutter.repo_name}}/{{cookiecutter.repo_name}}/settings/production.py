@@ -30,6 +30,14 @@ COMPRESS_CSS_FILTERS = [
 ]
 COMPRESS_CSS_HASHING_METHOD = 'content'
 
+INSTALLED_APPS += [
+    'raven.contrib.django.raven_compat',
+]
+
+RAVEN_CONFIG = {
+    'dsn': 'https://<key>:<secret>@sentry.fourdigits.nl/<project>',
+    'release': raven.fetch_git_sha(os.path.dirname(__file__)),
+}
 
 # Configuration from environment variables
 # Alternatively, you can set these in a local.py file on the server
