@@ -16,3 +16,4 @@ mox==0.5.3
 nose==1.3.7
 nosexcover==1.0.10
 pep8==1.6.2
+-e git://github.com/django-compressor/django-compressor.git@de3afb17ab102430e9d3c97034f6016c6a0d3037#egg=django_compressor-develop

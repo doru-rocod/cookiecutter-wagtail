@@ -18,3 +18,4 @@ man/
 nosetests.xml
 .template-version
 db.sqlite3
+src/
