@@ -9,7 +9,7 @@ Virtualenv
 ==============
 
     virtualenv .
-    ./bin/pip install -r requirements.txt
+    ./bin/pip install -r requirements/dev.txt
 
 Initialiseren
 =============
