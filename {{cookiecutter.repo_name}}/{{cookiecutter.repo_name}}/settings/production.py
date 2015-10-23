@@ -142,6 +142,7 @@ WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
         'INDEX': '{{ cookiecutter.repo_name }}',
+        'ATOMIC_REBUILD': True,
     },
 }
 
