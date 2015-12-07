@@ -19,5 +19,5 @@ def deploy_production():
         run('bin/python manage.py compress --settings={{ cookiecutter.repo_name }}.settings.production')
         run('bin/python manage.py update_index --settings={{ cookiecutter.repo_name }}.settings.production')
 
-        run('/etc/init.d/uwsgi reload')
+        run('service uwsgi restart')
         run('/etc/init.d/nginx reload')
