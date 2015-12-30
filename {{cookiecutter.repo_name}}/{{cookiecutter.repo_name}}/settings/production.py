@@ -1,12 +1,14 @@
 import os
+import dj_database_url
+
 from .base import *
 
 # Do not set SECRET_KEY, Postgres or LDAP password or any other sensitive data here.
-# Instead, create a local.py file on the server.
+# Instead, use environment variables or create a local.py file on the server.
 
 # Disable debug mode
 DEBUG = False
-TEMPLATE_DEBUG = False
+TEMPLATES[0]['OPTIONS']['debug'] = False
 
 # Use Redis as the cache backend for extra performance
 
@@ -89,6 +91,7 @@ if 'MEDIA_URL' in env:
 if 'MEDIA_DIR' in env:
     MEDIA_ROOT = env['MEDIA_DIR']
 
+
 # Database
 
 env.get('PGDATABASE', APP_NAME),
@@ -102,14 +105,18 @@ DATABASES = {
     	'PASSWD': '',
         # User, host and port can be configured by the PGUSER, PGHOST and
         # PGPORT environment variables (these get picked up by libpq).
+        }
     }
-}
 
 
 # Redis
 # Redis location can either be passed through with REDIS_HOST or REDIS_SOCKET
 
-if 'REDIS_HOST' in env:
+if 'REDIS_URL' in env:
+    REDIS_LOCATION = env['REDIS_URL']
+    BROKER_URL = env['REDIS_URL']
+
+elif 'REDIS_HOST' in env:
     REDIS_LOCATION = env['REDIS_HOST']
     BROKER_URL = 'redis://%s' % env['REDIS_HOST']
 
@@ -124,19 +131,17 @@ else:
 if REDIS_LOCATION is not None:
     CACHES = {
         'default': {
-            'BACKEND': 'redis_cache.cache.RedisCache',
+            'BACKEND': 'django_redis.cache.RedisCache',
             'LOCATION': REDIS_LOCATION,
             'KEY_PREFIX': APP_NAME,
             'OPTIONS': {
-                'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             }
         }
     }
 
 
 # Elasticsearch
-
-# Use Elasticsearch as the search backend for extra performance and better search results
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {

@@ -1,0 +1,1 @@
+web: uwsgi --http :$PORT --module {{ cookiecutter.repo_name }}.wsgi --master --offload-threads 1
