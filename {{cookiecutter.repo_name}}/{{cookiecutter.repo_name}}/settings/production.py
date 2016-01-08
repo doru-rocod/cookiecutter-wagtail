@@ -37,8 +37,7 @@ INSTALLED_APPS += [
 ]
 
 RAVEN_CONFIG = {
-    'dsn': 'https://<key>:<secret>@sentry.fourdigits.nl/<project>',
-    'release': raven.fetch_git_sha(os.path.dirname(__file__)),
+    # 'dsn': 'https://<key>:<secret>@sentry.fourdigits.nl/<project>',
 }
 
 # Configuration from environment variables
