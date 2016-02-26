@@ -23,7 +23,6 @@
 
         {% block content %}{% endblock %}
         
-        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
         {% compress js %}
             <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
         {% endcompress %}
@@ -42,7 +41,7 @@
         </script>
         <!--[if lt IE 11]>
             <div class="old-browser" style="position: fixed; top: 0; background: #fff; width: 100%; z-index: 999; text-align: center; left: 0; padding-top: 14px; border-bottom: 2px solid #000">
-                <p>U gebruikt een verouderde versie van Internet Explorer. Wij raden u aan om uw browser <a href="//browsehappy.com" target="_blank" style="text-decoration: underline;">bij te werken</a> om optimaal gebruik te kunnen maken van onze website. <a href="#" onClick="$(this).closest('.old-browser').slideUp(); return false;">Sluiten &times;</a></p>
+                <p>U gebruikt een verouderde versie van Internet Explorer. Wij raden u aan om uw browser <a href="https://www.whatbrowser.org/" target="_blank" style="text-decoration: underline;">bij te werken</a> om optimaal gebruik te kunnen maken van onze website. <a href="#" onClick="document.getElementsByClassName('old-browser')[0].style.display = 'none'; return false;">Sluiten &times;</a></p>
           </div>
         <![endif]-->
     </body>
