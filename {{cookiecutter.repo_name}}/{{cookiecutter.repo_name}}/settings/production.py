@@ -161,32 +161,71 @@ LOGGING = {
             'class': 'django.utils.log.AdminEmailHandler',
         },
     },
+    'formatters': {
+        'default': {
+            'verbose': '[%(asctime)s] (%(process)d/%(thread)d) %(name)s %(levelname)s: %(message)s'
+        }
+    },
     'loggers': {
+        '{{ cookiecutter.repo_name }}': {
+            'handlers':     [],
+            'level':        'INFO',
+            'propagate':    False,
+            'formatter':    'verbose',
+        },
+        'wagtail': {
+            'handlers':     [],
+            'level':        'INFO',
+            'propagate':    False,
+            'formatter':    'verbose',
+        },
         'django.request': {
             'handlers':     ['mail_admins'],
             'level':        'ERROR',
             'propagate':    False,
+            'formatter':    'verbose',
         },
         'django.security': {
             'handlers':     ['mail_admins'],
             'level':        'ERROR',
             'propagate':    False,
+            'formatter':    'verbose',
         },
     },
 }
 
 
-# Log errors to file
+if 'LOG_DIR' in env:
+    # {{ cookiecutter.project_name }} log
+    LOGGING['handlers']['{{ cookiecutter.repo_name }}_file'] = {
+        'level':        'INFO',
+        'class':        'cloghandler.ConcurrentRotatingFileHandler',
+        'filename':     os.path.join(env['LOG_DIR'], '{{ cookiecutter.repo_name }}.log'),
+        'maxBytes':     5242880, # 5MB
+        'backupCount':  5
+    }
+    LOGGING['loggers']['wagtail']['handlers'].append('{{ cookiecutter.repo_name }}_file')
 
-LOGGING['handlers']['errors_file'] = {
-    'level':        'ERROR',
-    'class':        'logging.handlers.RotatingFileHandler',
-    'filename':     '/var/log/django_errors.log',
-    'maxBytes':     5242880, # 5MB
-    'backupCount':  5
-}
-LOGGING['loggers']['django.request']['handlers'].append('errors_file')
-LOGGING['loggers']['django.security']['handlers'].append('errors_file')
+    # Wagtail log
+    LOGGING['handlers']['wagtail_file'] = {
+        'level':        'INFO',
+        'class':        'cloghandler.ConcurrentRotatingFileHandler',
+        'filename':     os.path.join(env['LOG_DIR'], 'wagtail.log'),
+        'maxBytes':     5242880, # 5MB
+        'backupCount':  5
+    }
+    LOGGING['loggers']['wagtail']['handlers'].append('wagtail_file')
+
+    # Error log
+    LOGGING['handlers']['errors_file'] = {
+        'level':        'ERROR',
+        'class':        'cloghandler.ConcurrentRotatingFileHandler',
+        'filename':     os.path.join(env['LOG_DIR'], 'error.log'),
+        'maxBytes':     5242880, # 5MB
+        'backupCount':  5
+    }
+    LOGGING['loggers']['django.request']['handlers'].append('errors_file')
+    LOGGING['loggers']['django.security']['handlers'].append('errors_file')
 
 
 try:

@@ -54,19 +54,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-)
+]
 
 ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
 
@@ -102,6 +101,24 @@ DATABASES = {
     }
 }
 
+# Password validation
+# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -119,15 +136,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATICFILES_FINDERS = (
+STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-)
+]
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
-)
+]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
@@ -139,9 +156,9 @@ MEDIA_URL = '/media/'
 # Django compressor settings
 # http://django-compressor.readthedocs.org/en/latest/settings/
 
-COMPRESS_PRECOMPILERS = (
+COMPRESS_PRECOMPILERS = [
     ('text/x-scss', 'django_libsass.SassCompiler'),
-)
+]
 
 # Use Redis as the cache backend for extra performance
 
@@ -165,16 +182,6 @@ WAGTAILSEARCH_BACKENDS = {
         'INDEX': '{{ cookiecutter.repo_name }}',
     },
 }
-
-
-# Celery settings
-# When you have multiple sites using the same Redis server,
-# specify a different Redis DB. e.g. redis://localhost/5
-
-BROKER_URL = 'redis://'
-
-CELERY_SEND_TASK_ERROR_EMAILS = True
-CELERYD_LOG_COLOR = False
 
 
 # Wagtail settings
