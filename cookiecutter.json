@@ -1,4 +1,4 @@
 {
-    "project_name": "Llama Savers",
+    "project_name": "Four Digits",
     "repo_name": "{{ cookiecutter.project_name|replace(' ', '')|lower }}"
 }
