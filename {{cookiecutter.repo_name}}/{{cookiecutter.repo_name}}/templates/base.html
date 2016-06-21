@@ -1,10 +1,10 @@
 {% raw %}{% load compress static wagtailuserbar %}
-
 <!DOCTYPE html>
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
         {% wagtailuserbar %}
 
         {% block content %}{% endblock %}
-        
+
         {% compress js %}
             <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
         {% endcompress %}
