@@ -34,13 +34,7 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
         },
-    },
-    'loggers': {
-        'artwork.importer': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-        },
-    },
+    }
 }
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
