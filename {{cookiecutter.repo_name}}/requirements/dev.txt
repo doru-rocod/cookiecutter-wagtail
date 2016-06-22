@@ -7,3 +7,4 @@ nosexcover==1.0.10
 pep8==1.6.2
 django-debug-toolbar==1.4
 fabric==1.10.2
+django_extensions==1.6.1
