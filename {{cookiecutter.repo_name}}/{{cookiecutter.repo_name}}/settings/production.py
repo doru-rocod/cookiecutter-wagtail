@@ -14,11 +14,11 @@ TEMPLATES[0]['OPTIONS']['debug'] = False
 
 CACHES = {
     'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis:192.168.165.192:6379',
         'KEY_PREFIX': '{{ cookiecutter.repo_name }}',
         'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
