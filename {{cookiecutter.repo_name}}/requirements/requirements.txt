@@ -6,7 +6,6 @@ libsass==0.8.3
 Pillow==3.2.0
 django-overextends==0.4.1
 whitenoise==3.2
-uwsgi==2.0.11.2
 ConcurrentLogHandler==0.9.1
 psycopg2==2.6.1
 django-compressor==2.1
