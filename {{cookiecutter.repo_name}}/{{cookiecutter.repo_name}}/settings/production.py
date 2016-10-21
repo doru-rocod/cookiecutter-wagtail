@@ -102,8 +102,8 @@ DATABASES = {
         'NAME': env.get('PGDATABASE', APP_NAME),
         'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
         'USER': env.get('PGDATABASE', APP_NAME),
-    	'HOST': '10.0.1.157',
-    	'PASSWD': '',
+        'HOST': '10.0.1.157',
+        'PASSWD': '',
         # User, host and port can be configured by the PGUSER, PGHOST and
         # PGPORT environment variables (these get picked up by libpq).
         }
