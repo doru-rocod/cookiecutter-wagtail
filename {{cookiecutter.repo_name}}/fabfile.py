@@ -23,8 +23,7 @@ def deploy_staging():
         run('bin/python manage.py compress --settings={{ cookiecutter.repo_name }}.settings.production')
         run('bin/python manage.py update_index --settings={{ cookiecutter.repo_name }}.settings.production')
 
-        run('service uwsgi restart')
-        run('/etc/init.d/nginx reload')
+        run('touch /etc/uwsgi/vassels/{{ cookiecutter.repo_name }}.ini')
 
 
 @roles('production')
@@ -38,5 +37,4 @@ def deploy_production():
         run('bin/python manage.py compress --settings={{ cookiecutter.repo_name }}.settings.production')
         run('bin/python manage.py update_index --settings={{ cookiecutter.repo_name }}.settings.production')
 
-        run('service uwsgi restart')
-        run('/etc/init.d/nginx reload')
+        run('touch /etc/uwsgi/vassels/{{ cookiecutter.repo_name }}.ini')
