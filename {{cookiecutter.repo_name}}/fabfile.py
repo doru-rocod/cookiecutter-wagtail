@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from fabric.api import *
 from fabric.context_managers import cd
 
