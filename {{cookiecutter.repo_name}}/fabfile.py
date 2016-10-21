@@ -12,6 +12,21 @@ env.user = 'root'
 env.use_ssh_config = True
 
 
+@roles('staging')
+def deploy_staging():
+    """Deploy to staging environment."""
+    with cd('/django/{{ cookiecutter.repo_name }}'):
+        run('git pull origin master')
+        run('./bin/pip install -r requirements/prd.txt')
+        run('bin/python manage.py migrate --noinput --settings={{ cookiecutter.repo_name }}.settings.production')
+        run('bin/python manage.py collectstatic --noinput --settings={{ cookiecutter.repo_name }}.settings.production')
+        run('bin/python manage.py compress --settings={{ cookiecutter.repo_name }}.settings.production')
+        run('bin/python manage.py update_index --settings={{ cookiecutter.repo_name }}.settings.production')
+
+        run('service uwsgi restart')
+        run('/etc/init.d/nginx reload')
+
+
 @roles('production')
 def deploy_production():
     """Deploy to production."""
