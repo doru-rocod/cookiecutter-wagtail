@@ -12,19 +12,21 @@ TEMPLATES[0]['OPTIONS']['debug'] = False
 
 # Use Redis as the cache backend for extra performance
 
+REDIS_IP = '192.168.165.192'
+REDIS_PORT = '6379'
+REDIS_LOCATION = '%s:%s' % (REDIS_IP, REDIS_PORT)
+BROKER_URL = 'redis://%s' % REDIS_IP
+
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis:192.168.165.192:6379',
+        'LOCATION': "redis:%s" % REDIS_LOCATION,
         'KEY_PREFIX': '{{ cookiecutter.repo_name }}',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
-
-REDIS_LOCATION = '192.168.165.192:6379'
-BROKER_URL = 'redis://192.168.165.192'
 
 # Compress static files offline and minify CSS
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
