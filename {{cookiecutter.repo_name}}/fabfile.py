@@ -11,12 +11,13 @@ env.roledefs = {
 env.user = 'root'
 env.use_ssh_config = True
 
+
 @roles('production')
 def deploy_production():
     """Deploy to production."""
     with cd('/django/{{ cookiecutter.repo_name }}'):
         run('git pull origin master')
-        run('bin/pip install --update -r requirements/prd.txt')
+        run('bin/pip install -r requirements/prd.txt')
         run('bin/python manage.py migrate --noinput --settings={{ cookiecutter.repo_name }}.settings.production')
         run('bin/python manage.py collectstatic --noinput --settings={{ cookiecutter.repo_name }}.settings.production')
         run('bin/python manage.py compress --settings={{ cookiecutter.repo_name }}.settings.production')
