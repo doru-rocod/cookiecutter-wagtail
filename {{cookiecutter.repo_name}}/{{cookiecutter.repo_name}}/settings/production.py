@@ -23,6 +23,9 @@ CACHES = {
     }
 }
 
+REDIS_LOCATION = '192.168.165.192:6379'
+BROKER_URL = 'redis://192.168.165.192'
+
 # Compress static files offline and minify CSS
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
 COMPRESS_OFFLINE = True
