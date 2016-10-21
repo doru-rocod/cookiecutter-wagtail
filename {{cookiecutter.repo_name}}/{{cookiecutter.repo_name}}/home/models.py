@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Homepage-related models and functions."""
 
 from __future__ import unicode_literals

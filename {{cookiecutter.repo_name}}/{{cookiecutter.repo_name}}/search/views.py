@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Search-related functions."""
 
 from django.shortcuts import render
