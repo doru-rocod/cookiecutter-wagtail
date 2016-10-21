@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+"""Search-related functions."""
+
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -6,6 +9,7 @@ from wagtail.wagtailsearch.models import Query
 
 
 def search(request):
+    """Search for 'query'."""
     search_query = request.GET.get('query', None)
     page = request.GET.get('page', 1)
 

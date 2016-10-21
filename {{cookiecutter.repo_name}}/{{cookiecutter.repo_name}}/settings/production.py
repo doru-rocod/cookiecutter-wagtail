@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import dj_database_url
 
@@ -12,13 +13,18 @@ TEMPLATES[0]['OPTIONS']['debug'] = False
 
 # Use Redis as the cache backend for extra performance
 
+REDIS_IP = '192.168.165.192'
+REDIS_PORT = '6379'
+REDIS_LOCATION = '%s:%s' % (REDIS_IP, REDIS_PORT)
+BROKER_URL = 'redis://%s' % REDIS_IP
+
 CACHES = {
     'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': "redis:%s" % REDIS_LOCATION,
         'KEY_PREFIX': '{{ cookiecutter.repo_name }}',
         'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
@@ -57,6 +63,8 @@ APP_NAME = env.get('APP_NAME', '{{ cookiecutter.repo_name }}')
 
 if 'SECRET_KEY' in env:
     SECRET_KEY = env['SECRET_KEY']
+else:
+    SECRET_KEY = 'TO_BE_CHANGED_BY_POST_GEN_HOOK'
 
 ALLOWED_HOSTS = [
     '.fourdigits.nl',  # Allow domain and subdomains
@@ -100,55 +108,23 @@ DATABASES = {
         'NAME': env.get('PGDATABASE', APP_NAME),
         'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
         'USER': env.get('PGDATABASE', APP_NAME),
-    	'HOST': '10.0.1.157',
-    	'PASSWD': '',
+        'HOST': '192.168.165.192',
+        'PASSWD': '',
         # User, host and port can be configured by the PGUSER, PGHOST and
         # PGPORT environment variables (these get picked up by libpq).
         }
     }
 
 
-# Redis
-# Redis location can either be passed through with REDIS_HOST or REDIS_SOCKET
-
-if 'REDIS_URL' in env:
-    REDIS_LOCATION = env['REDIS_URL']
-    BROKER_URL = env['REDIS_URL']
-
-elif 'REDIS_HOST' in env:
-    REDIS_LOCATION = env['REDIS_HOST']
-    BROKER_URL = 'redis://%s' % env['REDIS_HOST']
-
-elif 'REDIS_SOCKET' in env:
-    REDIS_LOCATION = 'unix://%s' % env['REDIS_SOCKET']
-    BROKER_URL = 'redis+socket://%s' % env['REDIS_SOCKET']
-
-else:
-    REDIS_LOCATION = None
-
-
-if REDIS_LOCATION is not None:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django_redis.cache.RedisCache',
-            'LOCATION': REDIS_LOCATION,
-            'KEY_PREFIX': APP_NAME,
-            'OPTIONS': {
-                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            }
-        }
-    }
-
-
 # Elasticsearch
 
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
-        'INDEX': '{{ cookiecutter.repo_name }}',
-        'ATOMIC_REBUILD': True,
-    },
-}
+# WAGTAILSEARCH_BACKENDS = {
+#     'default': {
+#         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+#         'INDEX': '{{ cookiecutter.repo_name }}',
+#         'ATOMIC_REBUILD': True,
+#     },
+# }
 
 # Logging
 

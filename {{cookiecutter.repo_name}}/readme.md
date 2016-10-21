@@ -46,3 +46,11 @@ If your ready developing your feature you could choose to squash all the migrati
 pull request.
 
     ./bin/python manage.py squashmigration
+
+
+Deployment
+==========
+
+Run::
+
+    ./bin/fab deploy_production:hosts='lightspeed.local.fourdigits.nl'
