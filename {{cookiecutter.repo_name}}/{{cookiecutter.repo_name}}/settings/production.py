@@ -57,6 +57,8 @@ APP_NAME = env.get('APP_NAME', '{{ cookiecutter.repo_name }}')
 
 if 'SECRET_KEY' in env:
     SECRET_KEY = env['SECRET_KEY']
+else:
+    SECRET_KEY = ''  # Put some random string here (>30 chars)
 
 ALLOWED_HOSTS = [
     '.fourdigits.nl',  # Allow domain and subdomains
