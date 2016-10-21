@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Fabric scripts for easy deployment to staging / production."""
 from fabric.api import *
 from fabric.context_managers import cd
 
@@ -12,6 +13,7 @@ env.use_ssh_config = True
 
 @roles('production')
 def deploy_production():
+    """Deploy to production."""
     with cd('/django/{{ cookiecutter.repo_name }}'):
         run('git pull origin master')
         run('bin/pip install --update -r requirements/prd.txt')
