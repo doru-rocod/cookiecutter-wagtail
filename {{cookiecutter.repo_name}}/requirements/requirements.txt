@@ -1,6 +1,6 @@
-Django>=1.9,<1.10
+Django>=1.10,<1.11
 elasticsearch>=1.0.0,<2.0.0
-wagtail>=1.5,<1.6
+wagtail>=1.6,<1.7
 django-libsass==0.7
 libsass==0.8.3
 Pillow==3.2.0
@@ -9,5 +9,5 @@ whitenoise==3.2
 uwsgi==2.0.11.2
 ConcurrentLogHandler==0.9.1
 psycopg2==2.6.1
-django-compressor==2.0
+django-compressor==2.1
 celery==3.1.17
