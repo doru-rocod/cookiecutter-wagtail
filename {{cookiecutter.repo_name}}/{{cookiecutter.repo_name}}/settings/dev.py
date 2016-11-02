@@ -15,10 +15,6 @@ SECRET_KEY = 'CHANGEME!!!'
 
 BASE_URL = 'http://localhost:8000'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.fourdigits.nl'
-EMAIL_PORT = 25
-
 # Process all tasks synchronously.
 # Helpful for local development and running tests
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True

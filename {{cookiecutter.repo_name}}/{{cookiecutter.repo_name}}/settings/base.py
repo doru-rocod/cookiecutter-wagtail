@@ -21,6 +21,27 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
+# Make sure to add the correct settings in production.py
+# This mailtrap account is accessible using the support@fourdigits.nl Google account.
+# The mailbox is called 'de rest'.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mailtrap.io'
+EMAIL_HOST_USER = 'ffa299e46d0b76'
+EMAIL_HOST_PASSWORD = 'e16d9bdfbf368d'
+EMAIL_PORT = 25
+
+# Make sure to add the correct DSN in production.py
+# This project is called 'De rest'
+RAVEN_CONFIG = {
+    'dsn': 'https://7ec32f4341674bc4b1efa1df5c57ab4b:465c749666a0415991bf2853a8b6a971@sentry.io/111454',
+}
+try:
+    import raven
+    import os
+    RAVEN_CONFIG['release'] = raven.fetch_git_sha(os.path.dirname(os.pardir))
+except ImportError:
+    pass
+
 
 # Application definition
 
