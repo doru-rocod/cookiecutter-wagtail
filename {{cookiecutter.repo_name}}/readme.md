@@ -51,6 +51,12 @@ pull request.
 Deployment
 ==========
 
-Run::
+Update the production installation with::
 
-    ./bin/fab deploy_production:hosts='lightspeed.local.fourdigits.nl'
+    ./bin/fab -R production deploy
+
+
+This will run on the first configured worker
+All good? Then reload uwsgi::
+
+    ./bin/fab -R production reload
